@@ -1,5 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { join } from 'path';
 
 export const typeOrmConfig = (configService:ConfigService): TypeOrmModuleOptions => ({
     type:'postgres',
@@ -8,5 +9,8 @@ export const typeOrmConfig = (configService:ConfigService): TypeOrmModuleOptions
     username:configService.get('DATABASE_USER'),
     password:configService.get('DATABASE_PASS'),
     database:configService.get('DATABASE_NAME'),
-    ssl:true
+    ssl:true,
+    logging:true,
+    entities:[join(__dirname+'../../**/*.entity.{js,ts}')],
+    synchronize:true
 })
