@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, HttpCode } from '@nestjs/common';
 import { CouponService } from './coupon.service';
 import { CreateCouponDto } from './dto/create-coupon.dto';
 import { UpdateCouponDto } from './dto/update-coupon.dto';
@@ -35,7 +35,8 @@ export class CouponController {
   }
 
   @Post('/apply')
+  @HttpCode(200)
   applyCuopon(@Body() applyCouponDto:ApplyCouponDto){
-    console.log()
+    return this.couponService.applyCuopon(applyCouponDto.coupon_name)
   }
 }
